@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Calculator</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Distributed Calculator</h1>
+            <p>Calculate arithmetic expressions in a distributed way</p>
+        </header>
+        
+        <section class="calculator">
+            <div class="input-container">
+                <input type="text" id="expression" placeholder="Enter expression (e.g., 2+2*2)">
+                <button id="calculate">Calculate</button>
+            </div>
+            <p class="info">Operations are processed in parallel where possible. Results will be available when calculation completes.</p>
+        </section>
+        
+        <section class="results">
+            <h2>Expression Results</h2>
+            <div class="loading-container" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading...</p>
+            </div>
+            <div id="expressions-list" class="expressions-list">
+                <!-- Expressions will be loaded here -->
+            </div>
+        </section>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

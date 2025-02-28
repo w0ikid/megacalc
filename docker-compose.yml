@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile.orchestrator
+    environment:
+      - TIME_ADDITION_MS=1000
+      - TIME_SUBTRACTION_MS=1000
+      - TIME_MULTIPLICATIONS_MS=1000
+      - TIME_DIVISIONS_MS=1000
+    ports:
+      - "8080:8080"
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - ORCHESTRATOR_URL=http://orchestrator:8080
+      - COMPUTING_POWER=4
+    depends_on:
+      - orchestrator
+    deploy:
+      replicas: 3  # Запуск трёх агентов для параллельных вычислений
