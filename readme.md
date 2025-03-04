@@ -40,7 +40,10 @@ localhost
 
 - Фронтенд (web/) обрабатывается Nginx, который монтируется в контейнере.
 - Если веб-интерфейс не отображает данные, попробуйте:
-  curl -X GET "http://localhost:8080/api/v1/expressions"
+
+```sh
+curl -X GET "http://localhost:8080/api/v1/expressions"
+```
 
 ## API эндпоинты
 ### Отправка выражения на вычисление
