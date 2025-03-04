@@ -24,3 +24,14 @@ services:
       - orchestrator
     deploy:
       replicas: 3  # Запуск трёх агентов для параллельных вычислений
+
+  web:
+    image: nginx:latest
+    volumes:
+      - "/home/doni/programming/go/go24yandex/megacalc/web:/usr/share/nginx/html"
+      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
+    ports:
+      - "80:80"
+    depends_on:
+      - orchestrator
+
