@@ -80,7 +80,57 @@ curl -X GET "http://localhost:8080/api/v1/expressions"
 ```sh
 curl -X GET "http://localhost:8080/api/v1/expressions/123e4567-e89b-12d3-a456-426614174000"
 ```
-
+### 1. **Неуспешное вычисление — Пустое выражение:**
+```sh
+curl -L 'http://localhost:8080/api/v1/calculate' -H 'Content-Type: application/json' --data '{"expression":""}'
+```
+Ответ (HTTP 400 Bad Request):
+```sh
+{
+    "error": "Key: 'ExpressionRequest.Expression' Error:Field validation for 'Expression' failed on the 'required' tag"
+}
+```
+### 2. Неуспешное вычисление — Неверный формат выражения:
+```sh
+curl -L 'http://localhost:8080/api/v1/calculate' -H 'Content-Type: application/json' --data '{"expression":"2++2"}'
+```
+Ответ (HTTP 400 Bad Request):
+```sh
+{
+    "error": "invalid expression: not enough operands for operator +"
+}
+```
+### 3. Выражение не найдено:
+```sh
+curl --location 'http://localhost:8080/api/v1/expressions/non-existent-id'
+```
+Ответ (HTTP 404 Not Found):
+```sh
+{
+    "error": "expression not found"
+}
+```
+4. Список всех выражений:
+```sh
+curl --location 'http://localhost:8080/api/v1/expressions'
+```
+Ответ (HTTP 200 OK):
+```sh
+{
+    "expressions": [
+        {"id": "ba0e2320-19e0-4595-90d8-7ce24d1a618f", "status": "failed"},
+        {"id": "5bd93f00-8fdd-43a4-87be-844193212778", "status": "completed", "result": 10},
+        {"id": "6fad18b7-3a22-460e-be79-a2ba2de37e3c", "status": "completed", "result": 2},
+        {"id": "89fe8f3f-92c3-4abe-ab39-3a069697a01b", "status": "completed", "result": 10},
+        {"id": "c07a3f9b-0f57-4a4e-b568-5b9e333d2b49", "status": "completed", "result": 10},
+        {"id": "fe751363-69a3-4eb2-aa28-e45870bb0ab8", "status": "completed", "result": 10},
+        {"id": "0f720b1a-4880-4139-b06f-a95d1059bbc0", "status": "completed", "result": 16},
+        {"id": "537cdd8a-f5eb-4d99-902c-65ff6598ab2e", "status": "completed", "result": 7.2},
+        {"id": "e37c7b28-d6c4-4d5d-857c-07ad2a217202", "status": "completed", "result": 10},
+        {"id": "3602eaf7-a141-488e-a7d0-5e958fafe3fd", "status": "completed", "result": 4}
+    ]
+}
+```
 ## Тестирование
 Запуск всех тестов
 ```sh
