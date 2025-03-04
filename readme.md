@@ -21,7 +21,7 @@
 
 ## Установка
 ```sh
-git@github.com:w0ikid/megacalc.git
+git clone git@github.com:w0ikid/megacalc.git
 cd megacalc
 go mod tidy  # Загрузка и синхронизация зависимостей
 ```
